@@ -54,6 +54,7 @@ cg_get_group(const torrent::Object& raw_args) {
 
 int64_t
 cg_d_group(core::Download* download) {
+  printf("cg_d_group 1\n");
   return torrent::resource_manager()->entry_at(download->main()).group();
 }
 
@@ -155,7 +156,10 @@ cg_get_group(const torrent::Object& raw_args) {
   return cg_list_hack.at(index);
 }
 
-int64_t cg_d_group(core::Download* download) { return download->group(); }
+int64_t cg_d_group(core::Download* download) {
+  printf("cg_d_group 2\n");
+  return download->group();
+ }
 const std::string& cg_d_group_name(core::Download* download) {
   printf("cg_d_group_name 2");
   return cg_list_hack.at(download->group())->name();
