@@ -1,4 +1,5 @@
 #include "config.h"
+#include "cstdio"
 
 #include <torrent/download/resource_manager.h>
 #include <torrent/download/choke_group.h>
@@ -58,6 +59,7 @@ cg_d_group(core::Download* download) {
 
 const std::string&
 cg_d_group_name(core::Download* download) {
+  printf("cg_d_group_name 1");
   return torrent::resource_manager()->group_at(torrent::resource_manager()->entry_at(download->main()).group())->name();
 }
 
@@ -155,6 +157,7 @@ cg_get_group(const torrent::Object& raw_args) {
 
 int64_t cg_d_group(core::Download* download) { return download->group(); }
 const std::string& cg_d_group_name(core::Download* download) {
+  printf("cg_d_group_name 2");
   return cg_list_hack.at(download->group())->name();
 }
 void    cg_d_group_set(core::Download* download, const torrent::Object& arg) { download->set_group(cg_get_index(arg)); }
