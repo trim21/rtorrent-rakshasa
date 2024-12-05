@@ -36,6 +36,8 @@
 
 #include "config.h"
 
+#include "cstdio"
+
 #include <functional>
 #include <unistd.h>
 #include <cstdio>
