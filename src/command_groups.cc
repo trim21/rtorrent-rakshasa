@@ -153,10 +153,9 @@ cg_get_group(const torrent::Object& raw_args) {
   return cg_list_hack.at(index);
 }
 
-static auto empty_group_name = std::string("");
 int64_t cg_d_group(core::Download* download) { return download->group(); }
 const std::string& cg_d_group_name(core::Download* download) {
-  return empty_group_name;
+  return cg_list_hack.at(download->group())->name();
 }
 void    cg_d_group_set(core::Download* download, const torrent::Object& arg) { download->set_group(cg_get_index(arg)); }
 
