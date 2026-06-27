@@ -1,0 +1,8 @@
+{
+  "mesonbuild.configureOnOpen": false,
+  "C_Cpp.default.configurationProvider": "mesonbuild.mesonbuild",
+  "C_Cpp.default.compileCommands": "/home/trim21/projects/build/rtorrent/builddir/compile_commands.json",
+  "[meson]": {
+    "editor.inlayHints.enabled": "off"
+  }
+}

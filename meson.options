@@ -1,0 +1,45 @@
+# ── User-configurable options for rtorrent ──
+
+option('build-profile',
+       type: 'combo', choices: ['release', 'debug'], value: 'release',
+       description: 'Build profile: release (O2 -g -DNDEBUG) or debug (O0 -g -DDEBUG)')
+
+option('extra-debug',
+       type: 'boolean', value: false,
+       description: 'Enable extra debugging checks (USE_EXTRA_DEBUG)')
+
+option('instrumentation',
+       type: 'boolean', value: false,
+       description: 'Enable internal instrumentation (LT_INSTRUMENTATION)')
+
+option('pthread-setstacksize',
+       type: 'feature', value: 'auto',
+       description: 'Explicitly set pthread stack size (auto-enabled for musl)')
+
+option('ncurses',
+       type: 'feature', value: 'auto',
+       description: 'Build with ncurses TUI support')
+
+option('lua',
+       type: 'feature', value: 'auto',
+       description: 'Enable Lua scripting support (searches lua → luajit → 5.4 → 5.3)')
+
+option('xmlrpc-c',
+       type: 'feature', value: 'auto',
+       description: 'Enable XMLRPC-C support (mutually exclusive with tinyxml2)')
+
+option('xmlrpc-tinyxml2',
+       type: 'feature', value: 'auto',
+       description: 'Enable XMLRPC via tinyxml2 (mutually exclusive with xmlrpc-c)')
+
+option('systemd',
+       type: 'feature', value: 'disabled',
+       description: 'Enable systemd socket activation support')
+
+option('tests',
+       type: 'boolean', value: false,
+       description: 'Build tests (requires cppunit)')
+
+option('address-space-size-mb',
+       type: 'integer', value: 0,
+       description: 'Default address space size in MB (0 = auto: 1024 on 32-bit, 32768 on 64-bit)')

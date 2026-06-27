@@ -12,11 +12,13 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y \
-          bear \
+          meson \
+          ninja-build \
           clang-tidy \
           libcppunit-dev \
           libcurl4-openssl-dev \
           libncurses-dev \
+          liblua5.3-dev \
           zlib1g-dev
 
     - uses: actions/checkout@v4
@@ -30,14 +32,11 @@ jobs:
         git remote add upstream "https://github.com/${{ github.event.pull_request.base.repo.full_name }}"
         git fetch --no-tags --no-recurse-submodules upstream "${{ github.event.pull_request.base.ref }}"
 
-    - name: Configure monorepo
-      run: |
-        autoreconf -fiv
-        ./configure
+    - name: Configure
+      run: meson setup build
 
-    - name: Build with bear
-      run: |
-        bear -- make -j$(nproc)
+    - name: Build
+      run: meson compile -C build
 
     - name: Create results directory
       run: mkdir clang-tidy-result
@@ -45,8 +44,8 @@ jobs:
     - name: Analyze
       run: |
         git diff -U0 "$(git merge-base HEAD "upstream/${{ github.event.pull_request.base.ref }}")" \
-          | clang-tidy-diff -p1 -path . -export-fixes clang-tidy-result/fixes.yml \
-            "-extra-arg=-include${PWD}/config.h"
+          | clang-tidy-diff -p1 -path build -export-fixes clang-tidy-result/fixes.yml \
+            "-extra-arg=-include${PWD}/build/config.h"
 
     - name: Save PR metadata
       run: |
